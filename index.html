@@ -328,7 +328,7 @@
     </section>
 
     <!-- SCRIPT POUR ANIMER LA CARTE DU DESSUS AU CLIC (10 CREATOR PREVIEWS) -->
-    <script>
+<script>
         const profileImages = [
             "creator-preview-1.png",
             "creator-preview-2.png",
@@ -352,13 +352,19 @@
             const mainImg = document.getElementById('mainProfileImg');
             const counter = document.getElementById('profileCounter');
 
+            // Animation de mélange (deck shuffle)
             mainCard.classList.remove('animate-card-swap');
             void mainCard.offsetWidth;
             mainCard.classList.add('animate-card-swap');
 
+            // Effet de fondu sur l'image pour éviter les bugs visuels
+            mainImg.style.transition = "opacity 0.15s ease";
+            mainImg.style.opacity = "0";
+
             setTimeout(() => {
                 currentImageIndex = (currentImageIndex + 1) % profileImages.length;
-
+                
+                // Force l'affichage de l'image et masque le fallback texte
                 mainImg.style.display = 'block';
                 if (mainImg.nextElementSibling) {
                     mainImg.nextElementSibling.style.display = 'none';
@@ -366,6 +372,9 @@
 
                 mainImg.src = profileImages[currentImageIndex];
                 counter.textContent = `(${currentImageIndex + 1}/${profileImages.length})`;
+
+                // Fait réapparaître l'image en douceur
+                mainImg.style.opacity = "1";
             }, 200);
 
             setTimeout(() => {
