@@ -23,29 +23,31 @@
         .neon-btn {
             background: linear-gradient(135deg, #FF1493 0%, #FF0055 100%);
             box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
-            transition: all 0.25s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
         .neon-btn:hover {
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 0 45px rgba(255, 20, 147, 0.9);
         }
         .glass-card {
-            background: rgba(18, 18, 24, 0.75);
-            backdrop-filter: blur(16px);
+            background: rgba(18, 18, 24, 0.85);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
         .glass-card:hover {
             border-color: rgba(255, 20, 147, 0.6);
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px -10px rgba(255, 20, 147, 0.25);
         }
-        @keyframes pulseBeat {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); }
-            50% { transform: scale(1.015); box-shadow: 0 0 50px rgba(255, 20, 147, 0.9); }
-        }
+        /* Téléphone Hero sans animation de respiration lourde (GPU friendly) */
         .phone-mockup {
-            animation: pulseBeat 2.4s infinite ease-in-out;
+            box-shadow: 0 0 35px rgba(255, 20, 147, 0.45);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            will-change: transform;
+        }
+        .phone-mockup:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.75);
         }
         .showcase-phone {
             aspect-ratio: 9 / 19;
@@ -55,31 +57,32 @@
             overflow: hidden;
             position: relative;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 20, 147, 0.2);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
         .showcase-phone:hover {
             border-color: #FF1493;
-            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.45);
-            transform: scale(1.02);
+            transform: translateY(-4px);
         }
 
+        /* Animations de clic allégées (uniquement opacity + transform GPU) */
         @keyframes phoneFadeSwap {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.95); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { opacity: 1; }
+            50% { opacity: 0.15; }
+            100% { opacity: 1; }
         }
         .animate-phone-swap {
-            animation: phoneFadeSwap 0.35s ease-in-out forwards;
+            animation: phoneFadeSwap 0.25s ease-out forwards;
         }
 
         @keyframes cardSwipeSwap {
-            0% { transform: scale(1.02) translateX(0) rotate(0deg); opacity: 1; }
-            40% { transform: scale(0.92) translateX(55px) translateY(-12px) rotate(8deg); opacity: 0; }
-            45% { transform: scale(0.90) translateX(-45px) translateY(10px) rotate(-6deg); opacity: 0; }
-            100% { transform: scale(1.02) translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+            0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+            45% { transform: translateX(40px) rotate(5deg); opacity: 0; }
+            55% { transform: translateX(-30px) rotate(-4deg); opacity: 0; }
+            100% { transform: translateX(0) rotate(0deg); opacity: 1; }
         }
         .animate-card-swap {
-            animation: cardSwipeSwap 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: cardSwipeSwap 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
         }
     </style>
 </head>
@@ -136,56 +139,21 @@
                 <p class="text-xs text-gray-500 mt-4">Requires Android 8.0+ • One time payment • Creator Profiles • Daily Content Updates</p>
             </div>
 
-            <!-- HERO PHONE MOCKUP INTERACTIF (3 VIDÉOS MP4 AU CLIC) -->
+            <!-- HERO PHONE MOCKUP INTERACTIF (SANS LAG DE SCALE) -->
             <div class="flex flex-col items-center">
-                <div class="phone-mockup w-[290px] h-[590px] rounded-[42px] bg-gradient-to-b from-zinc-900 to-black p-2.5 border-4 border-pink-500 relative shadow-2xl cursor-pointer select-none" onclick="cycleHeroVideo()">
+                <div class="phone-mockup w-[290px] h-[590px] rounded-[42px] bg-gradient-to-b from-zinc-900 to-black p-2.5 border-4 border-pink-500 relative cursor-pointer select-none" onclick="cycleHeroVideo()">
                     <div id="heroPhoneInner" class="w-full h-full rounded-[34px] bg-zinc-950 relative overflow-hidden">
-                        <video id="heroVideoPlayer" src="preview-1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        <video id="heroVideoPlayer" src="preview-1.mp4" preload="auto" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                     </div>
                 </div>
                 <!-- Indicateur sous le téléphone -->
                 <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-pink-500/30 text-xs text-gray-300 pointer-events-none">
-                    <span>👆 Click phone to preview previews</span>
+                    <span>👆 Click phone to switch video</span>
                     <span id="heroVideoCounter" class="text-pink-400 font-bold">(1/3)</span>
                 </div>
             </div>
         </div>
     </section>
-
-    <script>
-        const heroVideos = [
-            "preview-1.mp4",
-            "preview-2.mp4",
-            "preview-3.mp4"
-        ];
-        let currentHeroIndex = 0;
-        let isHeroAnimating = false;
-
-        function cycleHeroVideo() {
-            if (isHeroAnimating) return;
-            isHeroAnimating = true;
-
-            const phoneInner = document.getElementById('heroPhoneInner');
-            const videoPlayer = document.getElementById('heroVideoPlayer');
-            const counter = document.getElementById('heroVideoCounter');
-
-            phoneInner.classList.remove('animate-phone-swap');
-            void phoneInner.offsetWidth;
-            phoneInner.classList.add('animate-phone-swap');
-
-            setTimeout(() => {
-                currentHeroIndex = (currentHeroIndex + 1) % heroVideos.length;
-                videoPlayer.src = heroVideos[currentHeroIndex];
-                videoPlayer.play();
-                counter.textContent = `(${currentHeroIndex + 1}/${heroVideos.length})`;
-            }, 175);
-
-            setTimeout(() => {
-                phoneInner.classList.remove('animate-phone-swap');
-                isHeroAnimating = false;
-            }, 350);
-        }
-    </script>
 
     <!-- SHOWCASE SECTION AVEC MP4 -->
     <section id="showcase" class="py-20 px-6 max-w-7xl mx-auto">
@@ -275,45 +243,23 @@
 
             </div>
 
-            <!-- CONTENEUR INTERACTIF AVEC ANIMATION AU CLIC -->
+            <!-- CONTENEUR INTERACTIF AVEC ANIMATION FLUIDE AU CLIC -->
             <div class="flex flex-col items-center">
                 <div class="relative w-full max-w-md mx-auto h-[380px] group cursor-pointer select-none" onclick="cycleProfileImage()">
                     
-                    <!-- FICHE ARRIÈRE 2 -->
-                    <div id="backCard2" class="absolute inset-0 rounded-3xl overflow-hidden glass-card border border-pink-500/25 transition-all duration-500 ease-out transform group-hover:translate-x-7 group-hover:translate-y-6 group-hover:rotate-3 opacity-15 group-hover:opacity-35 brightness-75 blur-[0.5px] shadow-xl">
-                        <img src="hover-bg-2.png" alt="Hover Background Profile 2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop'">
+                    <!-- FICHE ARRIÈRE 2 (Sans filtre blur coûteux) -->
+                    <div id="backCard2" class="absolute inset-0 rounded-3xl overflow-hidden bg-zinc-900 border border-pink-500/25 transition-transform duration-300 ease-out transform group-hover:translate-x-7 group-hover:translate-y-6 group-hover:rotate-3 opacity-20 group-hover:opacity-40 shadow-xl">
+                        <img src="hover-bg-2.png" alt="Hover Background Profile 2" class="w-full h-full object-cover">
                     </div>
 
-                    <!-- FICHE ARRIÈRE 1 -->
-                    <div id="backCard1" class="absolute inset-0 rounded-3xl overflow-hidden glass-card border border-pink-500/30 transition-all duration-500 ease-out transform group-hover:-translate-x-7 group-hover:-translate-y-4 group-hover:-rotate-2 opacity-20 group-hover:opacity-45 brightness-75 blur-[0.5px] shadow-xl">
-                        <img src="hover-bg-1.png" alt="Hover Background Profile 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop'">
+                    <!-- FICHE ARRIÈRE 1 (Sans filtre blur coûteux) -->
+                    <div id="backCard1" class="absolute inset-0 rounded-3xl overflow-hidden bg-zinc-900 border border-pink-500/30 transition-transform duration-300 ease-out transform group-hover:-translate-x-7 group-hover:-translate-y-4 group-hover:-rotate-2 opacity-25 group-hover:opacity-50 shadow-xl">
+                        <img src="hover-bg-1.png" alt="Hover Background Profile 1" class="w-full h-full object-cover">
                     </div>
 
-                    <!-- FICHE PRINCIPALE (10 profils) -->
-                    <div id="mainProfileCard" class="absolute inset-0 rounded-3xl overflow-hidden glass-card neon-border transition-all duration-300 ease-out transform group-hover:scale-[1.02] shadow-2xl z-10 bg-zinc-950">
-                        <img id="mainProfileImg" src="creator-preview-1.png" alt="Main Creator Profile" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        
-                        <div class="hidden w-full h-full flex-col justify-between p-7 bg-zinc-950">
-                            <div class="flex items-center justify-between border-b border-white/10 pb-5">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-14 h-14 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-2xl">🌸</div>
-                                    <div>
-                                        <h3 class="font-extrabold text-base text-white">@HoyoDoo_Official</h3>
-                                        <p class="text-xs text-pink-400 underline mt-0.5">🔗 x.com/HoyoDoo ↗</p>
-                                    </div>
-                                </div>
-                                <span class="bg-pink-500 text-white px-3.5 py-1.5 rounded-full text-xs font-bold">+ Follow</span>
-                            </div>
-                            <div class="text-center py-6">
-                                <p class="text-xs text-pink-400 font-bold mb-1">Click to switch profiles ✨</p>
-                                <p class="text-[11px] text-gray-400">Place <code class="text-white">creator-preview-1.png</code> to <code class="text-white">10.png</code> in your folder</p>
-                            </div>
-                            <div class="grid grid-cols-3 gap-2">
-                                <div class="aspect-[9/14] rounded-xl bg-zinc-800 border border-pink-500/40"></div>
-                                <div class="aspect-[9/14] rounded-xl bg-zinc-800/50"></div>
-                                <div class="aspect-[9/14] rounded-xl bg-zinc-800/50"></div>
-                            </div>
-                        </div>
+                    <!-- FICHE PRINCIPALE (10 profils préchargés) -->
+                    <div id="mainProfileCard" class="absolute inset-0 rounded-3xl overflow-hidden neon-border shadow-2xl z-10 bg-zinc-950">
+                        <img id="mainProfileImg" src="creator-preview-1.png" alt="Main Creator Profile" class="w-full h-full object-cover">
                     </div>
 
                 </div>
@@ -327,64 +273,7 @@
         </div>
     </section>
 
-    <!-- SCRIPT POUR ANIMER LA CARTE DU DESSUS AU CLIC (10 CREATOR PREVIEWS) -->
-<script>
-        const profileImages = [
-            "creator-preview-1.png",
-            "creator-preview-2.png",
-            "creator-preview-3.png",
-            "creator-preview-4.png",
-            "creator-preview-5.png",
-            "creator-preview-6.png",
-            "creator-preview-7.png",
-            "creator-preview-8.png",
-            "creator-preview-9.png",
-            "creator-preview-10.png"
-        ];
-        let currentImageIndex = 0;
-        let isAnimatingCard = false;
-
-        function cycleProfileImage() {
-            if (isAnimatingCard) return;
-            isAnimatingCard = true;
-
-            const mainCard = document.getElementById('mainProfileCard');
-            const mainImg = document.getElementById('mainProfileImg');
-            const counter = document.getElementById('profileCounter');
-
-            // Animation de mélange (deck shuffle)
-            mainCard.classList.remove('animate-card-swap');
-            void mainCard.offsetWidth;
-            mainCard.classList.add('animate-card-swap');
-
-            // Effet de fondu sur l'image pour éviter les bugs visuels
-            mainImg.style.transition = "opacity 0.15s ease";
-            mainImg.style.opacity = "0";
-
-            setTimeout(() => {
-                currentImageIndex = (currentImageIndex + 1) % profileImages.length;
-                
-                // Force l'affichage de l'image et masque le fallback texte
-                mainImg.style.display = 'block';
-                if (mainImg.nextElementSibling) {
-                    mainImg.nextElementSibling.style.display = 'none';
-                }
-
-                mainImg.src = profileImages[currentImageIndex];
-                counter.textContent = `(${currentImageIndex + 1}/${profileImages.length})`;
-
-                // Fait réapparaître l'image en douceur
-                mainImg.style.opacity = "1";
-            }, 200);
-
-            setTimeout(() => {
-                mainCard.classList.remove('animate-card-swap');
-                isAnimatingCard = false;
-            }, 480);
-        }
-    </script>
-
-    <!-- FEATURES GRID -->
+    <!--FEATURES GRID -->
     <section id="features" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/5">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Complete <span class="text-pink-500">Goon & Social</span> Experience</h2>
@@ -499,6 +388,86 @@
         <p class="mb-2">♡ HoyoApp — Created by @HoyoDoo</p>
         <p>Not affiliated with Lovense. Lovense® is a registered trademark of Hytto Pte. Ltd.</p>
     </footer>
+
+    <!-- SCRIPTS OPTIMISÉS AVEC PRÉCHARGEMENT EN CACHE -->
+    <script>
+        const heroVideos = ["preview-1.mp4", "preview-2.mp4", "preview-3.mp4"];
+        let currentHeroIndex = 0;
+        let isHeroAnimating = false;
+
+        const profileImages = [
+            "creator-preview-1.png",
+            "creator-preview-2.png",
+            "creator-preview-3.png",
+            "creator-preview-4.png",
+            "creator-preview-5.png",
+            "creator-preview-6.png",
+            "creator-preview-7.png",
+            "creator-preview-8.png",
+            "creator-preview-9.png",
+            "creator-preview-10.png"
+        ];
+        let currentImageIndex = 0;
+        let isAnimatingCard = false;
+
+        // Précharge toutes les images de profil en mémoire dès l'ouverture du site
+        window.addEventListener('DOMContentLoaded', () => {
+            profileImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        });
+
+        function cycleHeroVideo() {
+            if (isHeroAnimating) return;
+            isHeroAnimating = true;
+
+            const phoneInner = document.getElementById('heroPhoneInner');
+            const videoPlayer = document.getElementById('heroVideoPlayer');
+            const counter = document.getElementById('heroVideoCounter');
+
+            phoneInner.classList.remove('animate-phone-swap');
+            void phoneInner.offsetWidth;
+            phoneInner.classList.add('animate-phone-swap');
+
+            setTimeout(() => {
+                currentHeroIndex = (currentHeroIndex + 1) % heroVideos.length;
+                videoPlayer.src = heroVideos[currentHeroIndex];
+                videoPlayer.load();
+                videoPlayer.play().catch(() => {});
+                counter.textContent = `(${currentHeroIndex + 1}/${heroVideos.length})`;
+            }, 120);
+
+            setTimeout(() => {
+                phoneInner.classList.remove('animate-phone-swap');
+                isHeroAnimating = false;
+            }, 260);
+        }
+
+        function cycleProfileImage() {
+            if (isAnimatingCard) return;
+            isAnimatingCard = true;
+
+            const mainCard = document.getElementById('mainProfileCard');
+            const mainImg = document.getElementById('mainProfileImg');
+            const counter = document.getElementById('profileCounter');
+
+            mainCard.classList.remove('animate-card-swap');
+            void mainCard.offsetWidth;
+            mainCard.classList.add('animate-card-swap');
+
+            setTimeout(() => {
+                currentImageIndex = (currentImageIndex + 1) % profileImages.length;
+                mainImg.src = profileImages[currentImageIndex];
+                counter.textContent = `(${currentImageIndex + 1}/${profileImages.length})`;
+            }, 160);
+
+            setTimeout(() => {
+                mainCard.classList.remove('animate-card-swap');
+                isAnimatingCard = false;
+            }, 350);
+        }
+    </script>
 
 </body>
 </html>
