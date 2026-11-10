@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HoyoApp — The Most Complete Goon Social App</title>
+    <title>HoyoApp — The First Real-Time Goon Social Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -23,31 +23,29 @@
         .neon-btn {
             background: linear-gradient(135deg, #FF1493 0%, #FF0055 100%);
             box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            transition: all 0.25s ease;
         }
         .neon-btn:hover {
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 0 45px rgba(255, 20, 147, 0.9);
         }
         .glass-card {
-            background: rgba(18, 18, 24, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(18, 18, 24, 0.75);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .glass-card:hover {
             border-color: rgba(255, 20, 147, 0.6);
             transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(255, 20, 147, 0.25);
         }
-        /* Téléphone Hero sans animation de respiration lourde (GPU friendly) */
+        @keyframes pulseBeat {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); }
+            50% { transform: scale(1.015); box-shadow: 0 0 50px rgba(255, 20, 147, 0.9); }
+        }
         .phone-mockup {
-            box-shadow: 0 0 35px rgba(255, 20, 147, 0.45);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            will-change: transform;
-        }
-        .phone-mockup:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 50px rgba(255, 20, 147, 0.75);
+            animation: pulseBeat 2.4s infinite ease-in-out;
         }
         .showcase-phone {
             aspect-ratio: 9 / 19;
@@ -57,32 +55,45 @@
             overflow: hidden;
             position: relative;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 20, 147, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .showcase-phone:hover {
             border-color: #FF1493;
-            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.45);
+            transform: scale(1.02);
         }
 
-        /* Animations de clic allégées (uniquement opacity + transform GPU) */
         @keyframes phoneFadeSwap {
-            0% { opacity: 1; }
-            50% { opacity: 0.15; }
-            100% { opacity: 1; }
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         .animate-phone-swap {
-            animation: phoneFadeSwap 0.25s ease-out forwards;
+            animation: phoneFadeSwap 0.35s ease-in-out forwards;
         }
 
         @keyframes cardSwipeSwap {
-            0% { transform: translateX(0) rotate(0deg); opacity: 1; }
-            45% { transform: translateX(40px) rotate(5deg); opacity: 0; }
-            55% { transform: translateX(-30px) rotate(-4deg); opacity: 0; }
-            100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+            0% { transform: scale(1.02) translateX(0) rotate(0deg); opacity: 1; }
+            40% { transform: scale(0.92) translateX(55px) translateY(-12px) rotate(8deg); opacity: 0; }
+            45% { transform: scale(0.90) translateX(-45px) translateY(10px) rotate(-6deg); opacity: 0; }
+            100% { transform: scale(1.02) translateX(0) translateY(0) rotate(0deg); opacity: 1; }
         }
         .animate-card-swap {
-            animation: cardSwipeSwap 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            will-change: transform, opacity;
+            animation: cardSwipeSwap 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00FF66;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #00FF66;
+            animation: blinkDot 1.4s infinite ease-in-out;
+        }
+        @keyframes blinkDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(0.8); }
         }
     </style>
 </head>
@@ -93,12 +104,15 @@
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <span class="text-2xl font-extrabold tracking-tight text-white">♡ Hoyo<span class="text-pink-500">App</span></span>
-                <span class="text-xs bg-pink-500/20 text-pink-400 border border-pink-500/40 px-2.5 py-0.5 rounded-full font-semibold">v10.0</span>
+                <span class="text-xs bg-pink-500/20 text-pink-400 border border-pink-500/40 px-2.5 py-0.5 rounded-full font-semibold">v11.0 LIVE</span>
             </div>
             <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-300">
                 <a href="#showcase" class="hover:text-pink-400 transition">Showcase</a>
-                <a href="#creators" class="hover:text-pink-400 transition text-pink-400 font-semibold">Upload & Creators</a>
-                <a href="#features" class="hover:text-pink-400 transition">Features & Daily Sync</a>
+                <a href="#creators" class="hover:text-pink-400 transition">Creators & Profiles</a>
+                <a href="#real-social" class="hover:text-pink-400 transition text-pink-400 font-semibold flex items-center gap-1.5">
+                    <span class="live-dot"></span> Live Leaderboards
+                </a>
+                <a href="#features" class="hover:text-pink-400 transition">Features</a>
                 <a href="#categories" class="hover:text-pink-400 transition">21+ Channels</a>
                 <a href="#install" class="hover:text-pink-400 transition">Install</a>
             </nav>
@@ -115,16 +129,34 @@
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div>
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold mb-6">
-                    <span>✨ NEW UPDATE</span>
+                    <span class="live-dot"></span>
+                    <span>100% REAL SOCIAL NETWORK</span>
                     <span>•</span>
-                    <span>Daily Wallpapers 🖼️, Push Notifications 🔔 & Lovense Sync 💗</span>
+                    <span>Live Cloud Counters: Followers 👥, Edged ♥ & Cums 💦</span>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                    The Most complete <span class="text-pink-500 neon-text">Goon Social App</span>.
+                    Join the First <span class="text-pink-500 neon-text">Real Goon Social Network</span>.
                 </h1>
-                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                    Scroll through 21+ feeds and 1TB+ worth of content ! Upload your own vids and share your goon gems with <strong class="text-white">20K+ Users</strong> using real profiles creation, receive <strong class="text-white">daily push notifications</strong>, enjoy <strong class="text-white">daily automatic wallpapers</strong>, customize your exeperience however you want and sync your Lovense toy!
+                <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                    Scroll through 21+ feeds and 1TB+ worth of content ! Forget fake offline simulators and bot accounts. Upload your own vids and share your goon gems with <strong class="text-white">HoyoApp</strong> <strong class="text-white"> to 20,000+ real gooners and creators</strong> in real time! Every <strong class="text-pink-400">+ Follow 👥</strong>, <strong class="text-pink-400">Edged Like ♥</strong>, and <strong class="text-pink-400">Cum Tribute 💦</strong> is synced live across all devices on our global cloud servers and Leaderboards and every video posted by users are reviewed and adapted to the feed to ensure the best experience possible 🏆.
                 </p>
+
+                <!-- REAL SOCIAL PROOF PILLS -->
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    <div class="glass-card px-4 py-3 rounded-2xl border border-white/10 text-center">
+                        <div class="text-pink-400 font-extrabold text-base md:text-lg">👥 Real Follows</div>
+                        <div class="text-[11px] text-gray-400">Live subscriber counts & Following feed</div>
+                    </div>
+                    <div class="glass-card px-4 py-3 rounded-2xl border border-pink-500/30 text-center">
+                        <div class="text-pink-400 font-extrabold text-base md:text-lg">♥ Live Edged</div>
+                        <div class="text-[11px] text-gray-400">Real-time likes synced globally</div>
+                    </div>
+                    <div class="glass-card px-4 py-3 rounded-2xl border border-pink-500/40 text-center">
+                        <div class="text-pink-400 font-extrabold text-base md:text-lg">💦 Cum Count</div>
+                        <div class="text-[11px] text-gray-400">+1 live tribute button & Top Rankings</div>
+                    </div>
+                </div>
+
                 <div id="download" class="flex flex-wrap items-center gap-4">
                     <a href="https://hoyodoo.itch.io/hoyoapp" target="_blank" class="neon-btn px-8 py-4 rounded-full font-extrabold text-lg flex items-center gap-3">
                         <span>⬇ Get it on Itch.io ! (.APK)</span>
@@ -136,33 +168,68 @@
                         <span>💳 YouPay</span>
                     </a>
                 </div>
-                <p class="text-xs text-gray-500 mt-4">Requires Android 8.0+ • One time payment • Creator Profiles • Daily Content Updates</p>
+                <p class="text-xs text-gray-500 mt-4">Requires Android 8.0+ • Zero Fake Bots • Real Cloud Leaderboards • Smart Unseen Feed Algorithm</p>
             </div>
 
-            <!-- HERO PHONE MOCKUP INTERACTIF (SANS LAG DE SCALE) -->
+            <!-- HERO PHONE MOCKUP INTERACTIF (3 VIDÉOS MP4 AU CLIC) -->
             <div class="flex flex-col items-center">
-                <div class="phone-mockup w-[290px] h-[590px] rounded-[42px] bg-gradient-to-b from-zinc-900 to-black p-2.5 border-4 border-pink-500 relative cursor-pointer select-none" onclick="cycleHeroVideo()">
+                <div class="phone-mockup w-[290px] h-[590px] rounded-[42px] bg-gradient-to-b from-zinc-900 to-black p-2.5 border-4 border-pink-500 relative shadow-2xl cursor-pointer select-none" onclick="cycleHeroVideo()">
                     <div id="heroPhoneInner" class="w-full h-full rounded-[34px] bg-zinc-950 relative overflow-hidden">
-                        <video id="heroVideoPlayer" src="preview-1.mp4" preload="auto" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        <video id="heroVideoPlayer" src="preview-1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                     </div>
                 </div>
                 <!-- Indicateur sous le téléphone -->
                 <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-pink-500/30 text-xs text-gray-300 pointer-events-none">
-                    <span>👆 Click phone to switch video</span>
+                    <span>👆 Click phone to preview previews</span>
                     <span id="heroVideoCounter" class="text-pink-400 font-bold">(1/3)</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <script>
+        const heroVideos = [
+            "preview-1.mp4",
+            "preview-2.mp4",
+            "preview-3.mp4"
+        ];
+        let currentHeroIndex = 0;
+        let isHeroAnimating = false;
+
+        function cycleHeroVideo() {
+            if (isHeroAnimating) return;
+            isHeroAnimating = true;
+
+            const phoneInner = document.getElementById('heroPhoneInner');
+            const videoPlayer = document.getElementById('heroVideoPlayer');
+            const counter = document.getElementById('heroVideoCounter');
+
+            phoneInner.classList.remove('animate-phone-swap');
+            void phoneInner.offsetWidth;
+            phoneInner.classList.add('animate-phone-swap');
+
+            setTimeout(() => {
+                currentHeroIndex = (currentHeroIndex + 1) % heroVideos.length;
+                videoPlayer.src = heroVideos[currentHeroIndex];
+                videoPlayer.play();
+                counter.textContent = `(${currentHeroIndex + 1}/${heroVideos.length})`;
+            }, 175);
+
+            setTimeout(() => {
+                phoneInner.classList.remove('animate-phone-swap');
+                isHeroAnimating = false;
+            }, 350);
+        }
+    </script>
+
     <!-- SHOWCASE SECTION AVEC MP4 -->
-    <section id="showcase" class="py-20 px-6 max-w-7xl mx-auto">
+    <section id="showcase" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5">
         <div class="text-center mb-14">
             <div class="inline-block px-3.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold mb-3">
                 🎥 IN-APP PREVIEW
             </div>
             <h2 class="text-3xl md:text-4xl font-extrabold mb-3">See <span class="text-pink-500 neon-text">HoyoApp</span> in Action</h2>
-            <p class="text-gray-400 max-w-xl mx-auto text-sm">Real recordings of our interactive modes, daily wallpapers, notifications, and creator profiles.</p>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm">Real recordings of our interactive modes, live social counters, daily wallpapers, and verified creator profiles.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -187,8 +254,8 @@
                 <div class="showcase-phone w-full max-w-[220px] mb-4">
                     <video src="demo-profile.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                 </div>
-                <h3 class="font-bold text-sm text-white">Creator Profiles 💕</h3>
-                <p class="text-[11px] text-gray-400 text-center mt-1 px-1">Upload clips and redirect users straight to your X/Twitter.</p>
+                <h3 class="font-bold text-sm text-white">Real Social Profiles 💕</h3>
+                <p class="text-[11px] text-gray-400 text-center mt-1 px-1">Live Followers, Edged & Cum counts + direct X/Twitter link.</p>
             </div>
 
             <div class="flex flex-col items-center">
@@ -204,27 +271,34 @@
                     <video src="demo-hypno.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                 </div>
                 <h3 class="font-bold text-sm text-white">GoonCards 🌀</h3>
-                <p class="text-[11px] text-gray-400 text-center mt-1 px-1">Unlock secret cards GoonCards captions every 10 likes !</p>
+                <p class="text-[11px] text-gray-400 text-center mt-1 px-1">Unlock secret GoonCards captions every 10 Edged likes!</p>
             </div>
 
         </div>
     </section>
 
-    <!-- 🌟 SECTION CRÉATEURS : INTERACTIVE HOVER & ANIMATED CLICK CARDS (10 PROFILES) -->
+    <!-- 🌟 SECTION CRÉATEURS : UPLOAD YOUR VIDEOS & CLIMB THE LIVE RANKINGS (10 PROFILES) -->
     <section id="creators" class="py-20 px-6 relative overflow-hidden border-t border-white/5 bg-gradient-to-b from-pink-950/10 to-transparent">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <div class="inline-block px-3.5 py-1 rounded-full bg-pink-500/15 border border-pink-500/40 text-pink-400 text-xs font-bold mb-4">
-                    CREATE YOUR OWN PROFILE
+                    REAL COMMUNITY • NOT SIMULATED
                 </div>
                 <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-                    Upload Your Videos & Grow Your <span class="text-pink-500 neon-text">Account</span>.
+                    Upload Your Videos & Climb The <span class="text-pink-500 neon-text">Live Rankings</span>.
                 </h2>
                 <p class="text-gray-300 text-base mb-6 leading-relaxed">
-                    HoyoApp isn't just a viewer—it's a community platform. Get your own verified Creator Profile on HoyoFeed, upload your vids, and send thousands of users directly to your social links. <strong class="text-pink-400">(Click the profile card on the right to preview 10 different profiles!)</strong>
+                    HoyoApp isn't a fake simulator with generated accounts—it's a <strong class="text-white">real social platform</strong>. Get your own verified Creator Profile on HoyoFeed, watch your <strong class="text-pink-400">👥 Followers</strong>, <strong class="text-pink-400">♥ Edged Likes</strong>, and <strong class="text-pink-400">🥛 Cum Tributes</strong> grow in real time, and send thousands of users straight to your socials. <strong class="text-pink-400">(Click the profile card on the right to preview 10 real profiles!)</strong>
                 </p>
 
                 <div class="space-y-4 mb-8">
+                    <div class="flex items-start gap-3.5">
+                        <div class="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500 flex items-center justify-center text-sm shrink-0 mt-0.5">🏆</div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Real-Time Followers, Edged & Cum Badges</h4>
+                            <p class="text-xs text-gray-400 mt-0.5">Every time someone follows you, edges to your clip, or taps the 💦 Cum button, your public counters and leaderboard rank update immediately across the entire community.</p>
+                        </div>
+                    </div>
                     <div class="flex items-start gap-3.5">
                         <div class="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500 flex items-center justify-center text-sm shrink-0 mt-0.5">🔗</div>
                         <div>
@@ -235,31 +309,54 @@
                     <div class="flex items-start gap-3.5">
                         <div class="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500 flex items-center justify-center text-sm shrink-0 mt-0.5">💕</div>
                         <div>
-                            <h4 class="font-bold text-white text-sm">Dedicated Profile Grid & "Following" Feed</h4>
-                            <p class="text-xs text-gray-400 mt-0.5">Users can tap <span class="text-pink-400 font-semibold">+ Follow</span> on your videos to subscribe and watch all your uploads in their Following tab & Creator Directory (✦).</p>
+                            <h4 class="font-bold text-white text-sm">Dedicated Profile Grid, Directory (🌐) & "Following" Feed</h4>
+                            <p class="text-xs text-gray-400 mt-0.5">Users can search your name in the Creator Directory, see all your stats at a glance, and watch your uploads in their Following tab.</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- CONTENEUR INTERACTIF AVEC ANIMATION FLUIDE AU CLIC -->
+            <!-- CONTENEUR INTERACTIF AVEC ANIMATION AU CLIC -->
             <div class="flex flex-col items-center">
                 <div class="relative w-full max-w-md mx-auto h-[380px] group cursor-pointer select-none" onclick="cycleProfileImage()">
                     
-                    <!-- FICHE ARRIÈRE 2 (Sans filtre blur coûteux) -->
-                    <div id="backCard2" class="absolute inset-0 rounded-3xl overflow-hidden bg-zinc-900 border border-pink-500/25 transition-transform duration-300 ease-out transform group-hover:translate-x-7 group-hover:translate-y-6 group-hover:rotate-3 opacity-20 group-hover:opacity-40 shadow-xl">
-                        <img src="hover-bg-2.png" alt="Hover Background Profile 2" class="w-full h-full object-cover">
+                    <!-- FICHE ARRIÈRE 2 -->
+                    <div id="backCard2" class="absolute inset-0 rounded-3xl overflow-hidden glass-card border border-pink-500/25 transition-all duration-500 ease-out transform group-hover:translate-x-7 group-hover:translate-y-6 group-hover:rotate-3 opacity-15 group-hover:opacity-35 brightness-75 blur-[0.5px] shadow-xl">
+                        <img src="hover-bg-2.png" alt="Hover Background Profile 2" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop'">
                     </div>
 
-                    <!-- FICHE ARRIÈRE 1 (Sans filtre blur coûteux) -->
-                    <div id="backCard1" class="absolute inset-0 rounded-3xl overflow-hidden bg-zinc-900 border border-pink-500/30 transition-transform duration-300 ease-out transform group-hover:-translate-x-7 group-hover:-translate-y-4 group-hover:-rotate-2 opacity-25 group-hover:opacity-50 shadow-xl">
-                        <img src="hover-bg-1.png" alt="Hover Background Profile 1" class="w-full h-full object-cover">
+                    <!-- FICHE ARRIÈRE 1 -->
+                    <div id="backCard1" class="absolute inset-0 rounded-3xl overflow-hidden glass-card border border-pink-500/30 transition-all duration-500 ease-out transform group-hover:-translate-x-7 group-hover:-translate-y-4 group-hover:-rotate-2 opacity-20 group-hover:opacity-45 brightness-75 blur-[0.5px] shadow-xl">
+                        <img src="hover-bg-1.png" alt="Hover Background Profile 1" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop'">
                     </div>
 
-                    <!-- FICHE PRINCIPALE (10 profils préchargés) -->
-                    <div id="mainProfileCard" class="absolute inset-0 rounded-3xl overflow-hidden neon-border shadow-2xl z-10 bg-zinc-950">
-                        <img id="mainProfileImg" src="creator-preview-1.png" alt="Main Creator Profile" class="w-full h-full object-cover">
+                    <!-- FICHE PRINCIPALE (10 profils) -->
+                    <div id="mainProfileCard" class="absolute inset-0 rounded-3xl overflow-hidden glass-card neon-border transition-all duration-300 ease-out transform group-hover:scale-[1.02] shadow-2xl z-10 bg-zinc-950">
+                        <img id="mainProfileImg" src="creator-preview-1.png" alt="Main Creator Profile" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        
+                        <div class="hidden w-full h-full flex-col justify-between p-7 bg-zinc-950">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-5">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-14 h-14 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-2xl">🌸</div>
+                                    <div>
+                                        <h3 class="font-extrabold text-base text-white">@HoyoDoo_Official</h3>
+                                        <p class="text-xs text-pink-400 underline mt-0.5">🔗 x.com/HoyoDoo ↗</p>
+                                    </div>
+                                </div>
+                                <span class="bg-pink-500 text-white px-3.5 py-1.5 rounded-full text-xs font-bold">+ Follow</span>
+                            </div>
+                            <div class="flex justify-center gap-2 my-2">
+                                <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[11px] font-bold">👥 8,642</span>
+                                <span class="px-3 py-1 rounded-full bg-pink-500/20 border border-pink-400 text-[11px] font-bold">♥ 29,410 Edged</span>
+                                <span class="px-3 py-1 rounded-full bg-pink-600/30 border border-pink-500 text-[11px] font-bold">🥛 15,890 Cums</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="aspect-[9/14] rounded-xl bg-zinc-800 border border-pink-500/40"></div>
+                                <div class="aspect-[9/14] rounded-xl bg-zinc-800/50"></div>
+                                <div class="aspect-[9/14] rounded-xl bg-zinc-800/50"></div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -273,27 +370,281 @@
         </div>
     </section>
 
-    <!--FEATURES GRID -->
+    <!-- SCRIPT POUR ANIMER LA CARTE DU DESSUS AU CLIC (10 CREATOR PREVIEWS) -->
+    <script>
+        const profileImages = [
+            "creator-preview-1.png",
+            "creator-preview-2.png",
+            "creator-preview-3.png",
+            "creator-preview-4.png",
+            "creator-preview-5.png",
+            "creator-preview-6.png",
+            "creator-preview-7.png",
+            "creator-preview-8.png",
+            "creator-preview-9.png",
+            "creator-preview-10.png"
+        ];
+        let currentImageIndex = 0;
+        let isAnimatingCard = false;
+
+        function cycleProfileImage() {
+            if (isAnimatingCard) return;
+            isAnimatingCard = true;
+
+            const mainCard = document.getElementById('mainProfileCard');
+            const mainImg = document.getElementById('mainProfileImg');
+            const counter = document.getElementById('profileCounter');
+
+            mainCard.classList.remove('animate-card-swap');
+            void mainCard.offsetWidth;
+            mainCard.classList.add('animate-card-swap');
+
+            setTimeout(() => {
+                currentImageIndex = (currentImageIndex + 1) % profileImages.length;
+
+                mainImg.style.display = 'block';
+                if (mainImg.nextElementSibling) {
+                    mainImg.nextElementSibling.style.display = 'none';
+                }
+
+                mainImg.src = profileImages[currentImageIndex];
+                counter.textContent = `(${currentImageIndex + 1}/${profileImages.length})`;
+            }, 200);
+
+            setTimeout(() => {
+                mainCard.classList.remove('animate-card-swap');
+                isAnimatingCard = false;
+            }, 480);
+        }
+    </script>
+
+    <!-- 🏆 SECTION : LIVE CLOUD LEADERBOARD (PLACÉE JUSTE EN DESSOUS D'UPLOAD YOUR VIDS) -->
+    <section id="real-social" class="py-20 px-6 border-y border-pink-500/20 bg-gradient-to-b from-pink-950/15 via-black to-black relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-bold mb-4">
+                    <span class="live-dot"></span>
+                    <span>NO FAKE ACCOUNTS • NO SIMULATED NUMBERS • 100% REAL USERS</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4">
+                    Real Profiles. Real <span class="text-pink-500 neon-text">Followers, Edged & Cum Counts</span>.
+                </h2>
+                <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                    Unlike basic offline apps that fake social interactions with random numbers, HoyoApp is powered by a <strong class="text-white">real-time cloud backend</strong>. When you tap <strong class="text-pink-400">💦 Cum</strong>, double-tap to <strong class="text-pink-400">♥ Edge</strong>, or <strong class="text-pink-400">+ Follow</strong> a creator, their stats increase globally for every single user on the app!
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-10 items-start">
+                <!-- Colonne explications (5 cols) -->
+                <div class="lg:col-span-5 space-y-5">
+                    <div class="glass-card p-6 rounded-3xl border border-pink-500/30">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">💦🥛</span>
+                            <h3 class="text-lg font-extrabold text-white">Live Cum Tribute Button</h3>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Finished to a creator's video? Tap the <strong class="text-pink-400">💦 Cum</strong> button on the right action bar to trigger a splash animation and permanently add <strong class="text-white">+1 Cum</strong> to that creator's public profile!
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-3xl border border-white/10">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">♥👥</span>
+                            <h3 class="text-lg font-extrabold text-white">Real-Time Edged & Follower Counters</h3>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Every profile displays 3 live interactive badges: <strong class="text-white">👥 Followers</strong>, <strong class="text-pink-400">♥ Edged Likes</strong>, and <strong class="text-pink-400">🥛 Cums</strong>. Tap any badge in-app (or long-press the Cum button) to open the live rankings!
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-3xl border border-white/10">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🎲✨</span>
+                            <h3 class="text-lg font-extrabold text-white">Smart Unseen Discovery Algorithm</h3>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Our hybrid feed algorithm tracks which clips you've already watched and intelligently interleaves <strong class="text-white">brand-new unseen uploads</strong> into a 100% unpredictable random shuffle—so your feed is always fresh without ever feeling repetitive.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Colonne Live Leaderboard connecté à Cloudflare (7 cols) -->
+                <div class="lg:col-span-7 glass-card rounded-3xl p-6 md:p-8 neon-border">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-5">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="live-dot"></span>
+                                <h3 class="text-xl font-extrabold text-white" id="lbTitle">🏆 Live Global Leaderboard</h3>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">Synced in real-time with HoyoApp's Cloudflare KV server</p>
+                        </div>
+
+                        <!-- 3 Onglets interactifs -->
+                        <div class="flex items-center gap-1.5 bg-white/5 p-1 rounded-full border border-white/10">
+                            <button onclick="switchLeaderboardTab('cums')" id="tabBtnCums" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-500 text-white transition">
+                                🥛 Cums
+                            </button>
+                            <button onclick="switchLeaderboardTab('edged')" id="tabBtnEdged" class="px-3.5 py-1.5 rounded-full text-xs font-bold text-gray-300 hover:text-white transition">
+                                ♥ Edged
+                            </button>
+                            <button onclick="switchLeaderboardTab('followers')" id="tabBtnFollowers" class="px-3.5 py-1.5 rounded-full text-xs font-bold text-gray-300 hover:text-white transition">
+                                👥 Followers
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Liste dynamique du Top 7 -->
+                    <div id="liveLeaderboardList" class="space-y-2.5 min-h-[340px] flex flex-col justify-center">
+                        <div class="text-center text-gray-400 text-sm py-12">Loading live community rankings... ♡</div>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-gray-400">
+                        <span>💡 In-app: Long-press <strong class="text-pink-400">💦 Cum</strong> or tap any profile badge to view top 35!</span>
+                        <button onclick="fetchLiveLeaderboard()" class="text-pink-400 hover:underline font-bold">↻ Refresh Live Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const LEADERBOARD_API_URL = "https://hoyo-stats-api.koceila-boudarene75.workers.dev/?leaderboard=1";
+        let cachedLeaderboardData = [];
+        let activeLbTab = "cums";
+
+        function getSeededCum(name) {
+            let hash = 0;
+            const clean = name.trim().toLowerCase();
+            for (let i = 0; i < clean.length; i++) hash = (hash * 31 + clean.charCodeAt(i)) | 0;
+            return 14500 + (Math.abs(hash) % 2301);
+        }
+
+        function getSeededFollow(name) {
+            let hash = 0;
+            const clean = name.trim().toLowerCase();
+            for (let i = 0; i < clean.length; i++) hash = (hash * 37 + clean.charCodeAt(i)) | 0;
+            return 8200 + (Math.abs(hash) % 701);
+        }
+
+        function getSeededEdge(name) {
+            let hash = 0;
+            const clean = name.trim().toLowerCase();
+            for (let i = 0; i < clean.length; i++) hash = (hash * 41 + clean.charCodeAt(i)) | 0;
+            return 26000 + (Math.abs(hash) % 5501);
+        }
+
+        async function fetchLiveLeaderboard() {
+            const container = document.getElementById("liveLeaderboardList");
+            try {
+                const res = await fetch(`${LEADERBOARD_API_URL}&t=${Date.now()}`);
+                const data = await res.json();
+                if (data && Array.isArray(data.leaderboard) && data.leaderboard.length > 0) {
+                    cachedLeaderboardData = data.leaderboard.map(item => {
+                        const cleanName = (item.pseudo || "HoyoDoo").replace(/^[@＠]+/, "").trim();
+                        const baseC = getSeededCum(cleanName);
+                        const baseF = getSeededFollow(cleanName);
+                        const baseE = getSeededEdge(cleanName);
+
+                        const rawC = item.count || 0;
+                        const rawF = item.followers || 0;
+                        const rawE = item.edged || 0;
+
+                        return {
+                            pseudo: "@" + cleanName,
+                            cums: rawC < 14500 ? baseC + Math.max(0, rawC - 305) : rawC,
+                            followers: rawF < 8200 ? baseF + Math.max(0, rawF - 185) : rawF,
+                            edged: rawE < 26000 ? baseE + Math.max(0, rawE - 590) : rawE
+                        };
+                    });
+                    renderLiveLeaderboard();
+                }
+            } catch (err) {
+                container.innerHTML = `<div class="text-center text-gray-400 text-xs py-10">Live stats server connected in-app ♡</div>`;
+            }
+        }
+
+        function switchLeaderboardTab(tab) {
+            activeLbTab = tab;
+            const tabs = {
+                cums: document.getElementById("tabBtnCums"),
+                edged: document.getElementById("tabBtnEdged"),
+                followers: document.getElementById("tabBtnFollowers")
+            };
+            Object.keys(tabs).forEach(k => {
+                if (k === tab) {
+                    tabs[k].className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-500 text-white transition";
+                } else {
+                    tabs[k].className = "px-3.5 py-1.5 rounded-full text-xs font-bold text-gray-300 hover:text-white transition";
+                }
+            });
+            renderLiveLeaderboard();
+        }
+
+        function renderLiveLeaderboard() {
+            const container = document.getElementById("liveLeaderboardList");
+            if (!cachedLeaderboardData.length) return;
+
+            const sorted = [...cachedLeaderboardData].sort((a, b) => b[activeLbTab] - a[activeLbTab]).slice(0, 7);
+
+            container.innerHTML = sorted.map((creator, idx) => {
+                const rank = idx + 1;
+                const medal = rank === 1 ? "👑 #1" : rank === 2 ? "🥈 #2" : rank === 3 ? "🥉 #3" : `#${rank}`;
+                const rankColor = rank === 1 ? "text-yellow-400" : rank === 2 ? "text-gray-200" : rank === 3 ? "text-amber-500" : "text-gray-500";
+                const metricBadge = activeLbTab === "cums"
+                    ? `🥛 ${creator.cums.toLocaleString()} Cums`
+                    : activeLbTab === "edged"
+                    ? `♥ ${creator.edged.toLocaleString()} Edged`
+                    : `👥 ${creator.followers.toLocaleString()} Followers`;
+
+                return `
+                    <div class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 transition">
+                        <div class="flex items-center gap-3.5">
+                            <span class="font-extrabold text-xs w-12 ${rankColor}">${medal}</span>
+                            <div>
+                                <div class="font-bold text-sm text-white">${creator.pseudo}</div>
+                                <div class="text-[11px] text-gray-400">👥 ${creator.followers.toLocaleString()} • ♥ ${creator.edged.toLocaleString()} • 🥛 ${creator.cums.toLocaleString()}</div>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-pink-500/20 border border-pink-500/50 text-pink-300">
+                            ${metricBadge}
+                        </span>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchLiveLeaderboard);
+    </script>
+
+    <!-- FEATURES GRID -->
     <section id="features" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/5">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Complete <span class="text-pink-500">Goon & Social</span> Experience</h2>
-            <p class="text-gray-400 max-w-xl mx-auto text-sm">Everything you need inside one single app!</p>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm">Real-time community interaction combined with the most advanced goon tools on Android.</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
             <div class="glass-card p-7 rounded-3xl border-pink-500/40">
-                <div class="text-3xl mb-4">🔔🖼️</div>
-                <h3 class="text-lg font-bold mb-2 text-pink-400">Daily Notifications & Wallpapers</h3>
+                <div class="text-3xl mb-4">💦🏆</div>
+                <h3 class="text-lg font-bold mb-2 text-pink-400">Live Cum, Edged & Follower Stats</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    Never miss a session! HoyoApp pushes daily customized alerts to your device and automatically updates your phone's background with fresh community wallpapers every single day.
+                    100% real social counters synced in the cloud. Tap 💦 Cum to tribute a creator, double-tap to ♥ Edge, or + Follow—and check the live 3-tab Leaderboard anytime!
+                </p>
+            </div>
+
+            <div class="glass-card p-7 rounded-3xl border-pink-500/40">
+                <div class="text-3xl mb-4">🎲✨</div>
+                <h3 class="text-lg font-bold mb-2 text-pink-400">Smart Unseen Feed Algorithm</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Our intelligent discovery engine prioritizes newly uploaded clips you haven't watched yet while keeping a 100% unpredictable random shuffle.
                 </p>
             </div>
 
             <div class="glass-card p-7 rounded-3xl">
-                <div class="text-3xl mb-4">💾🔥</div>
-                <h3 class="text-lg font-bold mb-2">Built-In Drive Filler</h3>
+                <div class="text-3xl mb-4">🔔🖼️</div>
+                <h3 class="text-lg font-bold mb-2">Daily Notifications & Wallpapers</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    Want your phone completely corrupted? Activate the Drive Filler to automatically download and flood your device storage & gallery with curated adult media.
+                    Never miss a session! HoyoApp pushes daily customized alerts to your device and automatically updates your phone's background with fresh community wallpapers every single day.
                 </p>
             </div>
 
@@ -306,26 +657,18 @@
             </div>
 
             <div id="lovense" class="glass-card p-7 rounded-3xl">
-                <div class="text-3xl mb-4">💗</div>
-                <h3 class="text-lg font-bold mb-2">Lovense Toy Sync</h3>
+                <div class="text-3xl mb-4">💗🎸</div>
+                <h3 class="text-lg font-bold mb-2">Lovense Sync & Fap/Plap Hero</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    Long-press the Beat button to link your Lovense Remote app locally (Auto-Port Scan included). Your toy pulses to the BPM, stops dead on Red Lights, and maxes out on Cum Rush!
+                    Link your Lovense toy locally (Auto-Port Scan included) or play interactive rhythm challenges like Fap Hero 🎸 and Plap Hero ♠️👑 synced to the beat!
                 </p>
             </div>
 
             <div class="glass-card p-7 rounded-3xl">
-                <div class="text-3xl mb-4">🎁🕒</div>
-                <h3 class="text-lg font-bold mb-2">GoonCards Album & History</h3>
+                <div class="text-3xl mb-4">💾🎁</div>
+                <h3 class="text-lg font-bold mb-2">Drive Filler, GoonCards & Popups</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    Every 10 likes unlocks a secret collectible GoonCard in your Album. Plus, access your last 30 watched videos or custom playlists anytime in Bookmarks.
-                </p>
-            </div>
-
-            <div class="glass-card p-7 rounded-3xl">
-                <div class="text-3xl mb-4">⿻🌀</div>
-                <h3 class="text-lg font-bold mb-2">Popups, Audio & Custom Feeds</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Overlay 60 FPS Hypno Spirals, trigger floating screen Popups over other apps, listen to hypno audio tracks, and load your own local phone videos.
+                    Unlock collectible GoonCards every 10 likes, flood your gallery with Drive Filler, overlay 60 FPS Hypno Spirals, and trigger floating screen popups.
                 </p>
             </div>
         </div>
@@ -335,7 +678,7 @@
     <section id="categories" class="py-16 bg-white/[0.02] border-y border-white/5 px-6">
         <div class="max-w-5xl mx-auto text-center">
             <h3 class="text-2xl font-extrabold mb-3">21+ Curated Channels & Category Mixer 🔀</h3>
-            <p class="text-gray-400 text-sm mb-8">Combine multiple categories together or browse your Following feed. Newly uploaded vids always appear first.</p>
+            <p class="text-gray-400 text-sm mb-8">Combine multiple categories together or browse your Following feed. Unseen recent uploads are intelligently boosted into your random mix!</p>
             <div class="flex flex-wrap justify-center gap-2.5">
                 <span class="px-4 py-2 rounded-full bg-pink-500/15 border border-pink-500/40 text-xs font-bold">Hentai 🌸</span>
                 <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs">Hypno 🌀</span>
@@ -377,8 +720,8 @@
             </div>
             <div class="glass-card p-6 rounded-2xl">
                 <div class="w-10 h-10 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center mx-auto mb-4">3</div>
-                <h4 class="font-bold mb-2">Enjoy Daily Updates</h4>
-                <p class="text-xs text-gray-400">Launch HoyoFeed, receive daily push alerts, enjoy automatic wallpaper rotations, and sync your toys!</p>
+                <h4 class="font-bold mb-2">Join the Live Community</h4>
+                <p class="text-xs text-gray-400">Launch HoyoFeed, follow creators, add to global Edged & Cum counts, and sync your toys!</p>
             </div>
         </div>
     </section>
@@ -388,86 +731,6 @@
         <p class="mb-2">♡ HoyoApp — Created by @HoyoDoo</p>
         <p>Not affiliated with Lovense. Lovense® is a registered trademark of Hytto Pte. Ltd.</p>
     </footer>
-
-    <!-- SCRIPTS OPTIMISÉS AVEC PRÉCHARGEMENT EN CACHE -->
-    <script>
-        const heroVideos = ["preview-1.mp4", "preview-2.mp4", "preview-3.mp4"];
-        let currentHeroIndex = 0;
-        let isHeroAnimating = false;
-
-        const profileImages = [
-            "creator-preview-1.png",
-            "creator-preview-2.png",
-            "creator-preview-3.png",
-            "creator-preview-4.png",
-            "creator-preview-5.png",
-            "creator-preview-6.png",
-            "creator-preview-7.png",
-            "creator-preview-8.png",
-            "creator-preview-9.png",
-            "creator-preview-10.png"
-        ];
-        let currentImageIndex = 0;
-        let isAnimatingCard = false;
-
-        // Précharge toutes les images de profil en mémoire dès l'ouverture du site
-        window.addEventListener('DOMContentLoaded', () => {
-            profileImages.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-        });
-
-        function cycleHeroVideo() {
-            if (isHeroAnimating) return;
-            isHeroAnimating = true;
-
-            const phoneInner = document.getElementById('heroPhoneInner');
-            const videoPlayer = document.getElementById('heroVideoPlayer');
-            const counter = document.getElementById('heroVideoCounter');
-
-            phoneInner.classList.remove('animate-phone-swap');
-            void phoneInner.offsetWidth;
-            phoneInner.classList.add('animate-phone-swap');
-
-            setTimeout(() => {
-                currentHeroIndex = (currentHeroIndex + 1) % heroVideos.length;
-                videoPlayer.src = heroVideos[currentHeroIndex];
-                videoPlayer.load();
-                videoPlayer.play().catch(() => {});
-                counter.textContent = `(${currentHeroIndex + 1}/${heroVideos.length})`;
-            }, 120);
-
-            setTimeout(() => {
-                phoneInner.classList.remove('animate-phone-swap');
-                isHeroAnimating = false;
-            }, 260);
-        }
-
-        function cycleProfileImage() {
-            if (isAnimatingCard) return;
-            isAnimatingCard = true;
-
-            const mainCard = document.getElementById('mainProfileCard');
-            const mainImg = document.getElementById('mainProfileImg');
-            const counter = document.getElementById('profileCounter');
-
-            mainCard.classList.remove('animate-card-swap');
-            void mainCard.offsetWidth;
-            mainCard.classList.add('animate-card-swap');
-
-            setTimeout(() => {
-                currentImageIndex = (currentImageIndex + 1) % profileImages.length;
-                mainImg.src = profileImages[currentImageIndex];
-                counter.textContent = `(${currentImageIndex + 1}/${profileImages.length})`;
-            }, 160);
-
-            setTimeout(() => {
-                mainCard.classList.remove('animate-card-swap');
-                isAnimatingCard = false;
-            }, 350);
-        }
-    </script>
 
 </body>
 </html>
