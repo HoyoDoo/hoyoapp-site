@@ -16,9 +16,16 @@
         .neon-text {
             text-shadow: 0 0 20px rgba(255, 20, 147, 0.7), 0 0 40px rgba(255, 20, 147, 0.3);
         }
+        .discord-glow {
+            text-shadow: 0 0 20px rgba(88, 101, 242, 0.8), 0 0 40px rgba(88, 101, 242, 0.35);
+        }
         .neon-border {
             box-shadow: 0 0 25px rgba(255, 20, 147, 0.35), inset 0 0 15px rgba(255, 20, 147, 0.15);
             border: 1px solid rgba(255, 20, 147, 0.5);
+        }
+        .discord-border {
+            box-shadow: 0 0 25px rgba(88, 101, 242, 0.35), inset 0 0 15px rgba(88, 101, 242, 0.15);
+            border: 1px solid rgba(88, 101, 242, 0.6);
         }
         .neon-btn {
             background: linear-gradient(135deg, #FF1493 0%, #FF0055 100%);
@@ -99,49 +106,50 @@
 </head>
 <body class="selection:bg-pink-500 selection:text-white">
 
-    <!-- NAVBAR -->
+<!-- NAVBAR -->
     <header class="fixed top-0 left-0 right-0 z-40 bg-black/60 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl font-extrabold tracking-tight text-white">♡ Hoyo<span class="text-pink-500">App</span></span>
-                <span class="text-xs bg-pink-500/20 text-pink-400 border border-pink-500/40 px-2.5 py-0.5 rounded-full font-semibold">v10.0.5 SOCIAL</span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-2 shrink-0">
+                <span class="text-xl xl:text-2xl font-extrabold tracking-tight text-white whitespace-nowrap">♡ Hoyo<span class="text-pink-500">App</span></span>
+                <span class="text-[11px] bg-[#5865F2]/25 text-[#9AA4FF] border border-[#5865F2]/50 px-2.5 py-0.5 rounded-full font-semibold whitespace-nowrap">v10.0.6 DISCORD</span>
             </div>
-            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-300">
-                <a href="#showcase" class="hover:text-pink-400 transition">Showcase</a>
-                <a href="#creators" class="hover:text-pink-400 transition">Creators & Profiles</a>
-                <a href="#real-social" class="hover:text-pink-400 transition flex items-center gap-1.5">
-                    <span class="live-dot"></span> Live Leaderboards
+
+            <nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-xs xl:text-sm font-medium text-gray-300">
+                <a href="#showcase" class="hover:text-pink-400 transition whitespace-nowrap">Showcase</a>
+                <a href="#creators" class="hover:text-pink-400 transition whitespace-nowrap">Creators</a>
+                <a href="#real-social" class="hover:text-pink-400 transition flex items-center gap-1.5 whitespace-nowrap">
+                    <span class="live-dot"></span> Leaderboards
                 </a>
-                <a href="#comments" class="hover:text-pink-400 transition text-pink-400 font-semibold">💬 Live Comments</a>
-                <a href="#features" class="hover:text-pink-400 transition">Features</a>
-                <a href="#install" class="hover:text-pink-400 transition">Install</a>
+                <a href="#comments" class="hover:text-pink-400 transition whitespace-nowrap">💬 Comments</a>
+                <a href="#discord-cogoon" class="hover:text-[#9AA4FF] transition text-[#9AA4FF] font-semibold whitespace-nowrap">👾 Discord & Co-Goon</a>
+                <a href="#features" class="hover:text-pink-400 transition whitespace-nowrap">Features</a>
+                <a href="#install" class="hover:text-pink-400 transition whitespace-nowrap">Install</a>
             </nav>
-            <a href="https://hoyodoo.itch.io/hoyoapp" target="_blank" class="neon-btn px-5 py-2.5 rounded-full text-sm font-bold">
+
+            <a href="https://hoyodoo.itch.io/hoyoapp" target="_blank" class="neon-btn px-4 xl:px-5 py-2.5 rounded-full text-xs xl:text-sm font-bold whitespace-nowrap shrink-0">
                 Get it on Itch.io ⬇
             </a>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
+<!-- HERO SECTION -->
     <section class="relative pt-36 pb-20 px-6 overflow-hidden">
         <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-pink-600/20 rounded-full blur-[140px] pointer-events-none"></div>
 
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div>
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold mb-6">
-                    <span class="live-dot"></span>
-                    <span>100% REAL GOON SOCIAL NETWORK</span>
-                    <span>•</span>
-                    <span>Live Comments 💬, Follows 👥, Edged ♥ & Cums 💦</span>
+		<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold mb-6">
+                    <span class="live-dot shrink-0"></span>
+                    <span class="leading-snug">100% REAL GOON SOCIAL NETWORK • Live Comments 💬, Follows 👥, Edged ♥ &amp; Cums 💦</span>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
                     The First True <span class="text-pink-500 neon-text">Goon Social Network</span>.
                 </h1>
                 <p class="text-gray-400 text-lg mb-6 leading-relaxed">
-                    More than just a video feed—<strong class="text-white">HoyoApp is a living, breathing social network built for gooners</strong>. Scroll through 21+ channels & 1TB+ of curated clips, <strong class="text-pink-400">post live comments 💬</strong> on any video, interact with <strong class="text-white">20,000+ real users and creators</strong>, and upload your own goon gems! Every <strong class="text-pink-400">Comment 💬</strong>, <strong class="text-pink-400">+ Follow 👥</strong>, <strong class="text-pink-400">Edged Like ♥</strong>, and <strong class="text-pink-400">Cum Tribute 💦</strong> is synced in real time across the entire community 🏆.
+                    More than just a video feed—<strong class="text-white">HoyoApp is a living, breathing social network built for gooners</strong>. Scroll through 21+ channels & 2TB+ of curated clips, <strong class="text-pink-400">post live comments 💬</strong> on any video, interact with <strong class="text-white">31,000+ real users and creators</strong>, and upload your own goon gems! Every <strong class="text-pink-400">Comment 💬</strong>, <strong class="text-pink-400">+ Follow 👥</strong>, <strong class="text-pink-400">Edged Like ♥</strong>, and <strong class="text-pink-400">Cum Tribute 💦</strong> is synced in real time across the entire community 🏆.
                 </p>
 
-                <!-- REAL SOCIAL PROOF PILLS (4 COLONNES AVEC COMMENTAIRES) -->
+                <!-- REAL SOCIAL PROOF PILLS (4 COLONNES) -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
                     <div class="glass-card px-3.5 py-3 rounded-2xl border border-pink-500/50 text-center bg-pink-500/10">
                         <div class="text-pink-400 font-extrabold text-base">💬 Comments</div>
@@ -172,7 +180,7 @@
                         <span>💳 YouPay</span>
                     </a>
                 </div>
-                <p class="text-xs text-gray-500 mt-4">Requires Android 8.0+ • Live TikTok-Style Comments • Top 200 Feeds • Zero Fake Bots</p>
+                <p class="text-xs text-gray-500 mt-4">Requires Android 8.0+ • Discord OAuth2 Hub • 30-Player Co-Goon Rooms • Live Comments • Zero Fake Bots</p>
             </div>
 
             <!-- HERO PHONE MOCKUP INTERACTIF (3 VIDÉOS MP4 AU CLIC) -->
@@ -620,20 +628,20 @@
         document.addEventListener("DOMContentLoaded", fetchLiveLeaderboard);
     </script>
 
-    <!-- 💬 SECTION : LIVE COMMENTS & TIKTOK-STYLE SOCIAL INTERACTION (PLACÉE SOUS REAL PROFILES) -->
+    <!-- 💬 SECTION : LIVE COMMENTS & TIKTOK-STYLE SOCIAL INTERACTION -->
     <section id="comments" class="py-20 px-6 relative overflow-hidden border-b border-pink-500/20 bg-gradient-to-b from-pink-950/20 via-black to-black">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center">
             <!-- Texte explicatif (7 colonnes) -->
             <div class="md:col-span-7">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-500/15 border border-pink-500/40 text-pink-400 text-xs font-bold mb-4">
                     <span class="live-dot"></span>
-                    <span>NEW IN v10.0.5 • REAL-TIME COMMUNITY INTERACTION</span>
+                    <span>REAL-TIME COMMUNITY INTERACTION</span>
                 </div>
                 <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
                     Comment, React & Edge <span class="text-pink-500 neon-text">Together in Real-Time</span>.
                 </h2>
                 <p class="text-gray-300 text-base mb-6 leading-relaxed">
-                    Gooning is better when you're not alone. Every single video on HoyoFeed now features a <strong class="text-white">live TikTok-style Comment Section 💬</strong>! Share your thoughts, drop instant emoji reactions while edging, see what other gooners are saying, and interact directly with your favorite creators.
+                    Gooning is better when you're not alone. Every single video on HoyoFeed features a <strong class="text-white">live TikTok-style Comment Section 💬</strong>! Share your thoughts, drop instant emoji reactions while edging, see what other gooners are saying, and interact directly with your favorite creators.
                 </p>
 
                 <div class="grid sm:grid-cols-3 gap-4">
@@ -683,7 +691,7 @@
                         <div class="flex items-start gap-3">
                             <div class="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs shrink-0">S</div>
                             <div class="flex-1">
-                                <div class="text-xs font-bold text-gray-400">Queen Isalyn <span class="text-[10px] font-normal text-gray-500 ml-1">9m</span></div>
+                                <div class="text-xs font-bold text-gray-400">Queen Isalyn<span class="text-[10px] font-normal text-gray-500 ml-1">9m</span></div>
                                 <div class="text-sm text-white mt-0.5">Goonstick drained~</div>
                             </div>
                             <div class="text-gray-400 text-xs flex flex-col items-center">♥<span class="text-[10px]">8</span></div>
@@ -733,14 +741,156 @@
         </div>
     </section>
 
-    <!-- FEATURES GRID -->
+    <!-- 👾👯‍♂️ NOUVELLE SECTION v10.0.6 : DISCORD COMMUNITY HUB, 30-PLAYER CO-GOON ROOMS & BOOKMARK SHARING -->
+    <section id="discord-cogoon" class="py-20 px-6 relative overflow-hidden border-b border-[#5865F2]/25 bg-gradient-to-b from-[#5865F2]/15 via-black to-black">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+            <!-- Aperçu visuel statique du Discord Community Hub & Co-Goon Room (5 colonnes) -->
+            <div class="md:col-span-5 order-2 md:order-1">
+                <!-- Bannière flottante Co-Goon -->
+                <div class="mb-3 flex justify-center">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#101018] border border-green-400 text-xs font-extrabold text-white shadow-lg">
+                        <span class="live-dot"></span>
+                        <span>Room #4829 (👑 Host) • 👥 14/30 • 💬 Live Chat</span>
+                    </div>
+                </div>
+
+                <!-- Carte Discord Community Hub -->
+                <div class="glass-card rounded-3xl discord-border overflow-hidden bg-[#0E0E15] shadow-2xl select-none p-4 space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                        <div class="font-extrabold text-base text-white">👾 Discord Community</div>
+                        <span class="px-2.5 py-1 rounded-full bg-green-500/15 text-green-400 text-[11px] font-bold">🟢 38 online • 👥 120</span>
+                    </div>
+
+                    <!-- Membre 1 : Online + Hosting Room + Pinned Bookmarks -->
+                    <div class="p-3 rounded-2xl bg-green-500/10 border border-green-500/40 space-y-2.5">
+                        <div class="flex items-center gap-3">
+                            <div class="relative shrink-0">
+                                <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-pink-500 to-indigo-500 flex items-center justify-center font-extrabold text-sm">K</div>
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#00FF66] border-2 border-[#0E0E15] absolute -bottom-0.5 -right-0.5"></span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="font-bold text-sm text-white truncate">KuroNeko</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-400 text-[10px] font-bold shrink-0">Looking for Co-Goon 👯‍♂️</span>
+                                </div>
+                                <div class="text-[11px] text-gray-400 truncate">@kuroneko_99 • 📺 Watching Hentai 🌸</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-center text-[11px] font-bold">
+                            <div class="py-1.5 rounded-xl bg-[#5865F2] text-white">➕ Add on Discord</div>
+                            <div class="py-1.5 rounded-xl bg-[#00FF66] text-black">👯‍♂️ Join (14/30)</div>
+                        </div>
+                        <div class="py-1.5 px-2.5 rounded-xl bg-yellow-500/15 border border-yellow-500/40 text-yellow-300 text-[11px] font-bold text-center">
+                            🔖 Import Pinned Bookmarks: "Favorites <3"
+                        </div>
+                    </div>
+
+                    <!-- Membre 2 : Online + Invite to Room -->
+                    <div class="p-3 rounded-2xl bg-white/[0.05] border border-[#5865F2]/30 space-y-2.5">
+                        <div class="flex items-center gap-3">
+                            <div class="relative shrink-0">
+                                <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center font-extrabold text-sm">V</div>
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#00FF66] border-2 border-[#0E0E15] absolute -bottom-0.5 -right-0.5"></span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="font-bold text-sm text-white truncate">VelvetPulse</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-400 text-[10px] font-bold shrink-0">Edging 😵‍💫</span>
+                                </div>
+                                <div class="text-[11px] text-gray-400 truncate">@velvetpulse • 📺 Watching Hypno 🌀</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-center text-[11px] font-bold">
+                            <div class="py-1.5 rounded-xl bg-[#5865F2] text-white">➕ Add on Discord</div>
+                            <div class="py-1.5 rounded-xl bg-pink-500 text-white">👋 Invite to Room</div>
+                        </div>
+                    </div>
+
+                    <!-- Membre 3 : Offline -->
+                    <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/10">
+                        <div class="flex items-center gap-3">
+                            <div class="relative shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-zinc-700 flex items-center justify-center font-extrabold text-xs text-gray-300">N</div>
+                                <span class="w-3 h-3 rounded-full bg-zinc-500 border-2 border-[#0E0E15] absolute -bottom-0.5 -right-0.5"></span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="font-bold text-sm text-gray-300 truncate">NightDrainer</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-400 text-[10px] font-bold">Offline • 18m ago</span>
+                                </div>
+                                <div class="text-[11px] text-gray-500 truncate">@nightdrainer • ⚫ Offline</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texte explicatif (7 colonnes) -->
+            <div class="md:col-span-7 order-1 md:order-2">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#5865F2]/20 border border-[#5865F2]/50 text-[#9AA4FF] text-xs font-bold mb-4">
+                    <span class="live-dot"></span>
+                    <span>NEW IN v10.0.6 • DISCORD INTEGRATION & CO-GOON PARTY</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
+                    Connect <span class="text-[#7E8BFF] discord-glow">Discord</span>, Host <span class="text-green-400">30 Gooners Rooms</span> & Share Bookmarks.
+                </h2>
+                <p class="text-gray-300 text-base mb-6 leading-relaxed">
+                    Open <strong class="text-white">🔖 My Bookmarks</strong> to log in with your real <strong class="text-[#9AA4FF]">Discord account</strong>! See which gooners are currently online with their real Discord avatars, add friends on Discord in one tap, jump into a live <strong class="text-green-400">30-player synchronized feed</strong>, or import your friends' favorite Bookmark playlists straight into your app.
+                </p>
+
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="glass-card p-5 rounded-2xl border border-[#5865F2]/40">
+                        <div class="text-xl mb-1.5">👾🟢</div>
+                        <h4 class="font-bold text-white text-sm">Discord Hub</h4>
+                        <p class="text-xs text-gray-400 mt-1">Sign in with Discord to display your avatar, Online/Offline status, live watching channel, mood tag, and 1-tap Add Friend & Room Invites.</p>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl border border-green-500/40">
+                        <div class="text-xl mb-1.5">👯‍♂️💬</div>
+                        <h4 class="font-bold text-white text-sm">30 Co-Goon Rooms</h4>
+                        <p class="text-xs text-gray-400 mt-1">Host or join a live session with up to 30 users! Whenever the host swipes, everyone's feed syncs automatically—complete with Live Room Chat & quick reactions.</p>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl border border-yellow-500/40">
+                        <div class="text-xl mb-1.5">🔖📤</div>
+                        <h4 class="font-bold text-white text-sm">Pin & Share Bookmark Packs</h4>
+                        <p class="text-xs text-gray-400 mt-1">Turn any Bookmark collection into a short <code class="text-yellow-300">HOYO-XXXX</code> code that you can share with any other users</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES GRID (3x3 = 9 CARTES) -->
     <section id="features" class="py-20 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Complete <span class="text-pink-500">Goon Social Network</span> Experience</h2>
-            <p class="text-gray-400 max-w-xl mx-auto text-sm">Real-time community comments, creator profiles, and live leaderboards combined with the most advanced goon tools on Android.</p>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm">Real-time community comments, creator profiles, live leaderboards, discord integration, 30-player Co-Goon rooms, live comments, and creator leaderboards!</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass-card p-7 rounded-3xl border-[#5865F2]/50">
+                <div class="text-3xl mb-4">👾🟢</div>
+                <h3 class="text-lg font-bold mb-2 text-[#9AA4FF]">Official Discord Hub & Invites</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Connect with Discord to show your real avatar, online/offline status, current channel, and mood—add friends on Discord or send instant in-app Room invites!
+                </p>
+            </div>
+
+            <div class="glass-card p-7 rounded-3xl border-green-500/40">
+                <div class="text-3xl mb-4">👯‍♂️💬</div>
+                <h3 class="text-lg font-bold mb-2 text-green-400">30 Co-Goon Party Rooms</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Scroll the exact same feed together in real time with up to 30 gooners! Features automatic host video sync, live room chat, and instant reaction chips.
+                </p>
+            </div>
+
+            <div class="glass-card p-7 rounded-3xl border-yellow-500/40">
+                <div class="text-3xl mb-4">🔖📤</div>
+                <h3 class="text-lg font-bold mb-2 text-yellow-400">Share, Pin & Import Bookmarks</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Export any playlist into a shareable <code class="text-yellow-300">HOYO-XXXX</code> Discord code, pin your favorite pack onto your Discord Hub card, and import friends' collections in 1 tap.
+                </p>
+            </div>
+
             <div class="glass-card p-7 rounded-3xl border-pink-500/40">
                 <div class="text-3xl mb-4">💬💦</div>
                 <h3 class="text-lg font-bold mb-2 text-pink-400">Live Comments, Cums & Edged Stats</h3>
@@ -841,7 +991,7 @@
             <div class="glass-card p-6 rounded-2xl">
                 <div class="w-10 h-10 rounded-full bg-pink-500 text-white font-bold flex items-center justify-center mx-auto mb-4">3</div>
                 <h4 class="font-bold mb-2">Join the Live Community</h4>
-                <p class="text-xs text-gray-400">Launch HoyoFeed, post live comments 💬, follow creators, add to global Edged & Cum counts, and sync your toys!</p>
+                <p class="text-xs text-gray-400">Connect your Discord 👾, jump into 30-player Co-Goon Rooms 👯‍♂️, post live comments 💬, share Bookmark packs, and sync your toys!</p>
             </div>
         </div>
     </section>
@@ -849,7 +999,7 @@
     <!-- FOOTER -->
     <footer class="border-t border-white/10 py-10 text-center text-xs text-gray-500 px-6">
         <p class="mb-2">♡ HoyoApp — Created by @HoyoDoo</p>
-        <p>Not affiliated with Lovense. Lovense® is a registered trademark of Hytto Pte. Ltd.</p>
+        <p>Not affiliated with Discord or Lovense. Lovense® is a registered trademark of Hytto Pte. Ltd.</p>
     </footer>
 
 </body>
