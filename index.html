@@ -520,7 +520,7 @@
     </section>
 
     <script>
-        const LEADERBOARD_API_URL = "https://hoyo-stats-api.koceila-boudarene75.workers.dev/?leaderboard=1";
+        const LEADERBOARD_API_URL = "https://api.hoyodoo.uk/?leaderboard=1";
         let cachedLeaderboardData = [];
         let activeLbTab = "cums";
 
@@ -548,7 +548,7 @@
         async function fetchLiveLeaderboard() {
             const container = document.getElementById("liveLeaderboardList");
             try {
-                const res = await fetch(`${LEADERBOARD_API_URL}&t=${Date.now()}`);
+                const res = await fetch(LEADERBOARD_API_URL);
                 const data = await res.json();
                 if (data && Array.isArray(data.leaderboard) && data.leaderboard.length > 0) {
                     cachedLeaderboardData = data.leaderboard.map(item => {
